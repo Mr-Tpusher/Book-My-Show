@@ -1,15 +1,16 @@
 package com.tpusher.bms.service;
 
 import com.tpusher.bms.dto.request.RegisterUserRequest;
-import com.tpusher.bms.dto.response.RegisterUserResponse;
+import com.tpusher.bms.dto.request.UserLoginRequest;
 import com.tpusher.bms.entity.User;
+import com.tpusher.bms.exception.IncorrectPasswordException;
 import com.tpusher.bms.exception.UserNameAlreadyExistsException;
+import com.tpusher.bms.exception.UserNotFoundException;
 import com.tpusher.bms.repository.UserRepository;
+import com.tpusher.bms.security.jwt.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import java.util.Optional;
 
 @Service
 public class UserService {
@@ -19,6 +20,9 @@ public class UserService {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private JwtUtil jwtUtil;
 
 
     public User registerUser(RegisterUserRequest request) {
@@ -43,4 +47,15 @@ public class UserService {
         return userRepository.save(user1);
     }
 
+    public String login(UserLoginRequest request) {
+
+        User user = userRepository.findByUsername(request.getUsername())
+                .orElseThrow(() -> new UserNotFoundException("User not found for username=" + request.getUsername()));
+
+        boolean passwordMatched = passwordEncoder.matches(request.getPassword(), user.getHashedPassword());
+        if (!passwordMatched) {
+            throw new IncorrectPasswordException("incorrect password provided.");
+        }
+        return jwtUtil.generateToken(user.getId(),user.getUsername(), user.getUserRole());
+    }
 }
