@@ -1,9 +1,7 @@
 package com.tpusher.bms.entity;
 
 import com.tpusher.bms.constant.UserRole;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.*;
 
 @Getter
@@ -22,5 +20,6 @@ public class User extends Auditable {
 
 
     @Column(name = "\"user_role\"")
+    @Enumerated(EnumType.STRING)
     private UserRole userRole;
 }

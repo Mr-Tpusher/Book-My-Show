@@ -16,13 +16,14 @@ import java.util.UUID;
 @MappedSuperclass
 public abstract class Auditable {
     @Id
-    private UUID id;
+    @Column(columnDefinition = "uuid", updatable = false)
+    private UUID id = UUID.randomUUID();
 
-    @Column(name = "\"createdAt\"")
-    private OffsetDateTime createdAt;
+    @Column(name = "\"createdAt\"", updatable = false)
+    private OffsetDateTime createdAt = OffsetDateTime.now();
 
     @Column(name = "\"updatedAt\"")
-    private OffsetDateTime updatedAt;
+    private OffsetDateTime updatedAt = OffsetDateTime.now();
 
     @Column(name = "\"deletedAt\"")
     private OffsetDateTime deletedAt;
