@@ -13,9 +13,15 @@ import lombok.Setter;
 @Entity
 @Table(name = "tickets")
 public class Ticket extends Auditable {
+
     @OneToOne
+    @JoinColumn(name = "booking_id")
     private Booking booking;
 
     @ManyToOne
+    @JoinColumn(name = "show_id")
     private Show show;
+
+    @Column(name = "payment_transaction_id")
+    private long paymentTransactionId;
 }

@@ -17,16 +17,18 @@ import java.util.List;
 @Table(name = "shows")
 public class Show extends Auditable {
 
+    @Column(name = "start_time", nullable = false)
     private OffsetDateTime startTime;
 
+    @Column(name = "end_time")
     private OffsetDateTime endTime;
 
     @ManyToOne
-    @JoinColumn(name = "\"hall_id\"")
+    @JoinColumn(name = "hall_id")
     private Hall hall;
 
     @ManyToOne
-    @JoinColumn(name = "\"movie_id\"")
+    @JoinColumn(name = "movie_id")
     private Movie movie;
 
     @OneToMany(mappedBy = "show")

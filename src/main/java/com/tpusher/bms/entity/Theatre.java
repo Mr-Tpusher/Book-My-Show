@@ -1,5 +1,6 @@
 package com.tpusher.bms.entity;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
@@ -18,8 +19,10 @@ import java.util.List;
 @Table(name = "theatres")
 public class Theatre extends Auditable {
 
+    @Column(name = "name", nullable = false)
     private String name;
 
+    @Column(name = "city", nullable = false)
     private String city;
 
     @OneToMany(mappedBy = "theatre")

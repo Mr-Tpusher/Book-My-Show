@@ -18,20 +18,21 @@ import java.util.List;
 public class Booking extends Auditable {
 
     @ManyToOne
-    @JoinColumn(name = "\"user_id\"")
+    @JoinColumn(name = "user_id")
     private User user;
 
     @ManyToOne
-    @JoinColumn(name = "\"show_id\"")
+    @JoinColumn(name = "show_id")
     private Show show;
 
     @OneToMany(mappedBy = "booking")
     private List<ShowSeat> bookedShowSeats;
 
-    @Column(name = "\"booking_status\"")
+    @Enumerated(EnumType.STRING)
+    @Column(name = "booking_status", nullable = false)
     private BookingStatus bookingStatus;
 
-    @Column(name = "\"totalAmount\"")
-    private double totalAmount;
+    @Column(name = "total_amount", nullable = false)
+    private Double totalAmount;
 
 }

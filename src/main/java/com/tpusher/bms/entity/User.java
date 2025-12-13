@@ -12,14 +12,14 @@ import lombok.*;
 @Table(name = "users")
 public class User extends Auditable {
 
-    @Column(name = "\"username\"")
+    @Column(name = "username", nullable = false, unique = true)
     private String username;
 
-    @Column(name = "\"hashed_password\"")
+    @Column(name = "hashed_password", nullable = false)
     private String hashedPassword;
 
 
-    @Column(name = "\"user_role\"")
+    @Column(name = "user_role", nullable = false)
     @Enumerated(EnumType.STRING)
     private UserRole userRole;
 }

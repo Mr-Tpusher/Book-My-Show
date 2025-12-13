@@ -13,6 +13,8 @@ import java.util.List;
 @Entity
 @Table(name = "halls")
 public class Hall extends Auditable {
+
+    @Column(name = "hall", nullable = false)
     private String name;
 
     @ManyToOne

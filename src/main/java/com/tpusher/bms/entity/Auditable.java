@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.OffsetDateTime;
-import java.util.UUID;
 
 @Getter
 @Setter
@@ -16,15 +15,15 @@ import java.util.UUID;
 @MappedSuperclass
 public abstract class Auditable {
     @Id
-    @Column(columnDefinition = "uuid", updatable = false)
-    private UUID id = UUID.randomUUID();
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-    @Column(name = "\"createdAt\"", updatable = false)
+    @Column(name = "created_at", updatable = false, nullable = false)
     private OffsetDateTime createdAt = OffsetDateTime.now();
 
-    @Column(name = "\"updatedAt\"")
+    @Column(name = "updated_at", nullable = false)
     private OffsetDateTime updatedAt = OffsetDateTime.now();
 
-    @Column(name = "\"deletedAt\"")
+    @Column(name = "deleted_at")
     private OffsetDateTime deletedAt;
 }
