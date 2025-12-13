@@ -12,6 +12,8 @@ import com.tpusher.bms.repository.ShowSeatRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ShowService {
 
@@ -35,11 +37,15 @@ public class ShowService {
         Show show = new Show(request.getStartTime(), request.getEndTime(), hallRef, movieRef);
 
         hallRef.getSeats().forEach(hallSeat -> {
-            show.addShowSeat(new ShowSeat());
+            show.addShowSeat(new ShowSeat(show, hallSeat, hallSeat.getBasePrice()));
         });
 
         return showRepository.save(show);
 
 
+    }
+
+    public List<Show> getShowsByTheatreId(long theatreId) {
+       return showRepository.findByTheatreId(theatreId);
     }
 }

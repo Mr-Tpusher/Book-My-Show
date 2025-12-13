@@ -28,8 +28,12 @@ public class ShowSeat extends Auditable {
     @Column(name = "is_reserved")
     private boolean isReserved;
 
-    public ShowSeat(Show show, HallSeat hallSeat) {
+    @Column(name = "price")
+    private double price;
+
+    public ShowSeat(Show show, HallSeat hallSeat, double price) {
         this.show = show;
         this.hallSeat = hallSeat;
+        this.price = price;
     }
 }
