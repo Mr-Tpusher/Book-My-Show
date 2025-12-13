@@ -16,6 +16,8 @@ public interface ShowRepository extends JpaRepository<Show, Long> {
 
     List<Show> findByMovieId(Long movieId);
 
+    List<Show> findByMovieName(String movieName);
+
     @Query(value =
             " select s.* from shows s " +
                     "join halls h on s.hall_id = h.id " +
@@ -23,4 +25,5 @@ public interface ShowRepository extends JpaRepository<Show, Long> {
                     "where t.id = :theatre_id;",
             nativeQuery = true)
     List<Show> findByTheatreId(@Param("theatre_id") Long theatreId);
+
 }

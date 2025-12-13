@@ -21,41 +21,29 @@ public class ShowController {
     @Autowired
     private ShowService showService;
 
-    @GetMapping
+    @GetMapping(params = "theatreId")
     public ResponseEntity<GenericBmsResponse> getShowsByTheatreId(@RequestParam Long theatreId) {
 
-        List<Show> shows = showService.getShowsByTheatreId(theatreId);
-
-        List<ShowsResponse> showsResponses = shows
-                .stream()
-                .map(show -> {
-                    ShowsResponse showsResponse = new ShowsResponse();
-                    showsResponse.setTheatreName(show.getHall().getTheatre().getName());
-                    showsResponse.setHallName(show.getHall().getName());
-                    showsResponse.setMovieName(show.getMovie().getName());
-                    showsResponse.setStartTime(show.getStartTime());
-                    showsResponse.setEndTime(show.getEndTime());
-
-                    List<ShowSeatDTO> availableSeats =
-                            show.getShowSeats()
-                                    .stream()
-                                    .map(showSeat -> {
-                                        ShowSeatDTO showSeatDTO = new ShowSeatDTO();
-                                        showSeatDTO.setSeatNumber(showSeat.getHallSeat().getName());
-                                        showSeatDTO.setReserved(showSeat.getHallSeat().isDamaged());
-                                        showSeatDTO.setPrice(showSeat.getPrice());
-                                        return showSeatDTO;
-                                    })
-                                    .toList();
-
-                    showsResponse.setSeats(availableSeats);
-                    return showsResponse;
-                }).toList();
+        List<ShowsResponse> showsResponses = showService.getShowsByTheatreId(theatreId);
 
 
         return ResponseEntity.ok(new GenericBmsResponse(
                 "success",
                 "shows fetched by theatre id.",
+                showsResponses
+        ));
+    }
+
+
+    @GetMapping(params = "movieName")
+    public ResponseEntity<GenericBmsResponse> getShowsByMovieName(@RequestParam String movieName) {
+
+        List<ShowsResponse> showsResponses = showService.getShowByMovieName(movieName);
+
+
+        return ResponseEntity.ok(new GenericBmsResponse(
+                "success",
+                "shows fetched.",
                 showsResponses
         ));
     }
