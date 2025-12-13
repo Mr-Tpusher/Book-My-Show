@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.OffsetDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -23,15 +24,26 @@ public class Show extends Auditable {
     @Column(name = "end_time")
     private OffsetDateTime endTime;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "hall_id")
     private Hall hall;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "movie_id")
     private Movie movie;
 
-    @OneToMany(mappedBy = "show")
-    private List<ShowSeat> showSeats;
+    @OneToMany(mappedBy = "show", cascade = CascadeType.ALL)
+    private List<ShowSeat> showSeats = new ArrayList<>();
 
+    public Show(OffsetDateTime startTime, OffsetDateTime endTime, Hall hall, Movie movie) {
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.hall = hall;
+        this.movie = movie;
+    }
+
+    public void addShowSeat(ShowSeat showSeat) {
+        this.showSeats.add(showSeat);
+        showSeat.setShow(this);
+    }
 }

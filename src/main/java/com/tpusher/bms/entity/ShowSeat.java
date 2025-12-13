@@ -8,7 +8,6 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
 @Entity
 @Table(name = "show_seats")
@@ -28,4 +27,9 @@ public class ShowSeat extends Auditable {
 
     @Column(name = "is_reserved")
     private boolean isReserved;
+
+    public ShowSeat(Show show, HallSeat hallSeat) {
+        this.show = show;
+        this.hallSeat = hallSeat;
+    }
 }

@@ -24,6 +24,9 @@ public class Hall extends Auditable {
     private Theatre theatre;
 
     @OneToMany(mappedBy = "hall", cascade = CascadeType.ALL)
+    private List<Show> shows = new ArrayList<>();
+
+    @OneToMany(mappedBy = "hall", cascade = CascadeType.ALL)
     private List<HallSeat> seats = new ArrayList<>();
 
     public Hall(String name, Theatre theatre) {
@@ -34,6 +37,11 @@ public class Hall extends Auditable {
     public void addSeat(HallSeat hallSeat) {
         seats.add(hallSeat);
         hallSeat.setHall(this);
+    }
+
+    public void addShow(Show show) {
+        shows.add(show);
+        show.setHall(this);
     }
 
 }
