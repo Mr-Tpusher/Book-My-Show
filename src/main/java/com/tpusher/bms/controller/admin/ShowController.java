@@ -1,9 +1,7 @@
 package com.tpusher.bms.controller.admin;
 
-import com.tpusher.bms.dto.dto.ShowSeatDTO;
 import com.tpusher.bms.dto.response.GenericBmsResponse;
 import com.tpusher.bms.dto.response.ShowsResponse;
-import com.tpusher.bms.entity.Show;
 import com.tpusher.bms.service.ShowService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -43,7 +41,7 @@ public class ShowController {
 
         return ResponseEntity.ok(new GenericBmsResponse(
                 "success",
-                "shows fetched.",
+                "shows fetched by movie id.",
                 showsResponses
         ));
     }
