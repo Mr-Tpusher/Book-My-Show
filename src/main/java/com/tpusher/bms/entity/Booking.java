@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -26,7 +27,7 @@ public class Booking extends Auditable {
     private Show show;
 
     @OneToMany(mappedBy = "booking")
-    private List<ShowSeat> bookedShowSeats;
+    private List<ShowSeat> bookedShowSeats = new ArrayList<>();
 
     @Enumerated(EnumType.STRING)
     @Column(name = "booking_status", nullable = false)
@@ -34,5 +35,10 @@ public class Booking extends Auditable {
 
     @Column(name = "total_amount", nullable = false)
     private Double totalAmount;
+
+    public void addBookedShowSeats(ShowSeat showSeat) {
+        bookedShowSeats.add(showSeat);
+        showSeat.setBooking(this);
+    }
 
 }

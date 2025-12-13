@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -14,13 +16,24 @@ import java.util.List;
 @Table(name = "halls")
 public class Hall extends Auditable {
 
-    @Column(name = "hall", nullable = false)
+    @Column(name = "name", nullable = false)
     private String name;
 
     @ManyToOne
     @JoinColumn(name = "theatre_id")
     private Theatre theatre;
 
-    @OneToMany(mappedBy = "hall")
-    private List<HallSeat> seats;
+    @OneToMany(mappedBy = "hall", cascade = CascadeType.ALL)
+    private List<HallSeat> seats = new ArrayList<>();
+
+    public Hall(String name, Theatre theatre) {
+        this.name = name;
+        this.theatre = theatre;
+    }
+
+    public void addSeat(HallSeat hallSeat) {
+        seats.add(hallSeat);
+        hallSeat.setHall(this);
+    }
+
 }

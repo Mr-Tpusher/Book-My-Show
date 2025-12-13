@@ -1,14 +1,12 @@
 package com.tpusher.bms.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -25,6 +23,18 @@ public class Theatre extends Auditable {
     @Column(name = "city", nullable = false)
     private String city;
 
-    @OneToMany(mappedBy = "theatre")
-    private List<Hall> halls;
+    @OneToMany(mappedBy = "theatre", cascade = CascadeType.ALL)
+    private List<Hall> halls = new ArrayList<>();
+
+
+    public Theatre(String name, String city) {
+        this.name = name;
+        this.city = city;
+    }
+
+    public void addHall(Hall hall) {
+        halls.add(hall);
+        hall.setTheatre(this);
+    }
+
 }

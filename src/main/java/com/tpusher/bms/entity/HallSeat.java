@@ -31,4 +31,11 @@ public class HallSeat extends Auditable {
     @ManyToOne
     @JoinColumn(name = "hall_id")
     private Hall hall;
+
+    public HallSeat(String name, SeatType seatType, double basePrice, Hall hall) {
+        this.name = name;
+        this.seatType = seatType;
+        this.basePrice = basePrice;
+        this.hall = hall;
+    }
 }
