@@ -8,7 +8,7 @@ import java.util.UUID;
 
 
 @Repository
-public interface ShowRepository extends JpaRepository<Show, UUID> {
-    List<Show> findByHallId(UUID hallId);
-    List<Show> findByMovieId(UUID movieId);
+public interface ShowRepository extends JpaRepository<Show, Long> {
+    List<Show> findByHallId(Long hallId);
+    List<Show> findByMovieId(Long movieId);
 }

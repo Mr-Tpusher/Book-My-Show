@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Repository
-public interface HallRepository extends JpaRepository<Hall, UUID> {
-    List<Hall> findByTheatreId(UUID theatreId);
+public interface HallRepository extends JpaRepository<Hall, Long> {
+    List<Hall> findByTheatreId(Long theatreId);
 
 }

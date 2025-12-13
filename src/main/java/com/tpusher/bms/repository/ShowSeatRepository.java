@@ -6,6 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 import java.util.UUID;
 
-public interface ShowSeatRepository extends JpaRepository<ShowSeat, UUID> {
-    List<ShowSeat> findByShowId(UUID showId);
+public interface ShowSeatRepository extends JpaRepository<ShowSeat, Long> {
+    List<ShowSeat> findByShowId(Long showId);
 }

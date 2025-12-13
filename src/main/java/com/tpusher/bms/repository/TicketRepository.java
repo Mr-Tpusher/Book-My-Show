@@ -8,6 +8,6 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Repository
-public interface TicketRepository extends JpaRepository<Ticket, UUID> {
-    Optional<Ticket> findByBookingId(UUID bookingId);
+public interface TicketRepository extends JpaRepository<Ticket, Long> {
+    Optional<Ticket> findByBookingId(Long bookingId);
 }

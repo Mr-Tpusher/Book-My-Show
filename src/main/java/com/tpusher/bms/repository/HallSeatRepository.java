@@ -9,6 +9,6 @@ import java.util.List;
 import java.util.UUID;
 
 @Repository
-public interface HallSeatRepository extends JpaRepository<HallSeat, UUID> {
-    List<HallSeat> findByHallId(UUID hallId);
+public interface HallSeatRepository extends JpaRepository<HallSeat, Long> {
+    List<HallSeat> findByHallId(Long hallId);
 }

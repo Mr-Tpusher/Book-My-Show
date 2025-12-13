@@ -9,7 +9,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Repository
-public interface TheatreRepository extends JpaRepository<Theatre, UUID> {
+public interface TheatreRepository extends JpaRepository<Theatre, Long> {
     Optional<Theatre> findByName(String name);
     List<Theatre> findByCity(String city);
 
