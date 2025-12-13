@@ -11,7 +11,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 public class RegisterUserResponse {
-    private UUID userId;
+    private long userId;
     private String username;
     private UserRole userRole;
 }

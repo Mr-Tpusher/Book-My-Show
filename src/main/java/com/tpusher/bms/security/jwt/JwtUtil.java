@@ -33,7 +33,7 @@ public class JwtUtil {
         this.expiration = expiration;
     }
 
-    public String generateToken(UUID userId, String userName, UserRole userRole) {
+    public String generateToken(long userId, String userName, UserRole userRole) {
         long now = System.currentTimeMillis();
         Map<String, Object> claims =
                 Map.of(
