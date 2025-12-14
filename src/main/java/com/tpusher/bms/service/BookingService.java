@@ -13,6 +13,9 @@ public class BookingService {
     @Autowired
     private BookingRepository bookingRepository;
 
+    @Autowired
+    private PaymentService paymentService;
+
 
     @Transactional
     public void reserveSeats(ReserveShowSeatsRequest request) {
@@ -32,6 +35,11 @@ public class BookingService {
         // 1. check if seats are still available
 
         // 2. make payment
+            paymentService.pay(
+                    paymentRequest.getPaymentMethod(),
+                    paymentRequest.getPaymentDetails(),
+                    paymentRequest.getAmountInRupees()
+            );
 
         // 3. update seats to reserved
 
