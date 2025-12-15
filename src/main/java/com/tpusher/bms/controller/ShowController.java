@@ -1,4 +1,4 @@
-package com.tpusher.bms.controller.admin;
+package com.tpusher.bms.controller;
 
 import com.tpusher.bms.dto.response.GenericBmsResponse;
 import com.tpusher.bms.dto.response.ShowsResponse;
